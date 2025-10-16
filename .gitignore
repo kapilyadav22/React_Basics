@@ -1,0 +1,27 @@
+# Node modules
+node_modules/
+
+# Build outputs
+build/
+dist/
+out/
+coverage/
+
+# Caches
+.cache/
+.parcel-cache/
+.next/
+.vite/
+.svelte-kit/
+.nuxt/
+
+
+# IDEs and OS
+.vscode/
+.idea/
+.DS_Store
+
+
+# Misc
+*.tgz
+*.log
