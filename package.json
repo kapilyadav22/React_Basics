@@ -2,10 +2,10 @@
   "name": "react_basics",
   "version": "1.0.0",
   "description": "This is a Learning React Basics Application",
-   "source": "src/index.html",
+  "source": "src/index.html",
   "scripts": {
-    "start" : "parcel",
-    "build" : "parcel build"
+    "start": "parcel",
+    "build": "parcel build"
   },
   "keywords": [
     "react",
@@ -14,7 +14,7 @@
   "author": "Kapil",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^2.15.4"
+    "parcel": "^2.16.0"
   },
   "dependencies": {
     "npm": "^11.5.1",

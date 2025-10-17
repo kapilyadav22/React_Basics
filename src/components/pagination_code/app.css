@@ -1,0 +1,12 @@
+.card {
+height:100px;
+width:150px;
+background-Color: lightgrey;
+margin-Bottom:'10px';
+border-Radius: '5px';
+}
+
+.pagination {
+    display: "flex";
+    padding: "2px";
+}
