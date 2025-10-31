@@ -1,0 +1,16 @@
+.App{
+    text-align: center;
+}
+
+.outer {
+    width: 70vw;
+    border: 1px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+
+}
+
+.inner {
+    /* background-color: green; */
+    transition: 0.5s ease-in;
+}

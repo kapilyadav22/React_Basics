@@ -25,3 +25,5 @@ coverage/
 # Misc
 *.tgz
 *.log
+# React Component Preview
+previewConfig.json

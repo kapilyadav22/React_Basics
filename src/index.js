@@ -8,19 +8,29 @@ import DebouncedSearch from "./Debounced_Search/Debounced";
 import ToastContainer from "./components/toast_container/toast";
 import ControlledForm from "./components/formdemo/controlled_form";
 import UncontrolledForm from "./components/formdemo/uncontrolled_form";
+import ImageSlider from "./components/image_slider/ImageSlider";
+import ChipsInput from "./components/chips/ChipsInput";
+import OTP from "./components/otp/OTP";
+import TabForm from "./components/tab-form/TabForm";
+import NestedCheckBox from "./components/Nested_CheckBoxes/NestedCheckBox";
 
 
 const App = ()=>{
-    return <>
+    return <> 
     {/* <Pagination></Pagination> */}
     {/* <Meme></Meme> */}
     {/* <CounterApp></CounterApp> */}
     {/* <DebouncedSearch></DebouncedSearch> */}
-    {/* <App></App> */}
     {/* <ToastContainer></ToastContainer> */}
-   <ControlledForm></ControlledForm>
+   {/* <ControlledForm></ControlledForm>
    <UncontrolledForm>
    </UncontrolledForm>
+    </> */}
+    {/* <ImageSlider></ImageSlider> */}
+    {/* <ChipsInput/> */}
+    {/* <OTP/> */}
+    {/* <TabForm/> */}
+    <NestedCheckBox/>
     </>
 };
 

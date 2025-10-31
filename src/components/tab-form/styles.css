@@ -1,0 +1,31 @@
+.tab-outer{
+    display: flex;
+
+}
+
+.tab-inner{
+ padding: 5px;
+/* margin: 5px; */
+border: solid 1px black;
+cursor: pointer;
+}
+
+.body{
+    height: 200px;
+    width: 70vw;
+    border: solid 1px black;
+}
+
+.form-container{
+        display: flex;
+        flex-direction: column;
+        padding-top: 5px;
+}
+
+.buttons{
+    width: 70vw;
+        display: flex;
+        justify-content: space-between;
+        /* flex-direction: column; */
+        padding-top: 5px;
+}

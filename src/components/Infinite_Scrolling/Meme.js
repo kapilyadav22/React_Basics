@@ -29,10 +29,10 @@ export default function Meme() {
       const json = await data.json();
       console.log(json);
       setMemes((memes) => [...memes, ...json.memes]);
-      // setShowShimmer(true);
+      // setShowShimmer(false);
     } catch (err) {
       console.log(err);
-      // setShowShimmer(true);
+      // setShowShimmer(false);
     }
   };
 
