@@ -1,0 +1,120 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.app-container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+input[type="text"],
+select {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  min-width: 200px;
+}
+
+.loading,
+.error,
+.no-results {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+.error {
+  color: red;
+}
+
+.favorites {
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: #555;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  gap: 1rem;
+}
+
+.card1 {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #fafafa;
+  transition: box-shadow 0.2s ease;
+}
+
+/* .card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+} */
+
+/* .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
+
+h3 {
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.fav-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.fav-btn.active {
+  color: gold;
+}
+
+p {
+  color: #555;
+  margin-top: 0.4rem;
+}
+
+.dept {
+  display: inline-block;
+  margin-top: 0.6rem;
+  background: #eee;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #333;
+}
+
+.email {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.3rem;
+}
+
+.container{
+  display: flex;
+  margin: 50px;
+  justify-content: space-between;
+}

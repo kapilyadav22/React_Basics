@@ -12,7 +12,10 @@ import ImageSlider from "./components/image_slider/ImageSlider";
 import ChipsInput from "./components/chips/ChipsInput";
 import OTP from "./components/otp/OTP";
 import TabForm from "./components/tab-form/TabForm";
-import NestedCheckBox from "./components/Nested_CheckBoxes/NestedCheckBox";
+import EmployeeDirectory from "./components/Employee_Directory/EmployeeDirectory";
+import Employee from "./components/Employee_Directory/Employee";
+import ProductStore from "./components/ECommerce/ProductStore";
+// import NestedCheckBox from "./components/Nested_CheckBoxes/NestedCheckBox";
 
 
 const App = ()=>{
@@ -30,7 +33,8 @@ const App = ()=>{
     {/* <ChipsInput/> */}
     {/* <OTP/> */}
     {/* <TabForm/> */}
-    <NestedCheckBox/>
+    {/* <Employee/> */}
+    <ProductStore/>
     </>
 };
 
