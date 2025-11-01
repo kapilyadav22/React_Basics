@@ -1,7 +1,7 @@
 import React from 'react';
 import AutoComplete from './Autocomplete';
 
-const App = () => {
+const Auto = () => {
   const fruits = [
     'Apple',
     'Banana',
@@ -30,4 +30,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Auto;
