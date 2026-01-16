@@ -41,7 +41,7 @@ export default function ProductStore() {
   }, [sortOption, products]);
 
   // Add to cart + persist in localStorage
-  const handleAddToCart = (product) => {
+  const handleAddToCart = useCallback((product) => {
     setCart((prev) => {
       const exists = prev.find((p) => p.id === product.id);
       let updated;
@@ -55,13 +55,29 @@ export default function ProductStore() {
       localStorage.setItem("cart", JSON.stringify(updated));
       return updated;
     });
-  };
+  },[]);
 
-  const handleRemoveFromCart = (productId) => {
-    setCart(cart.filter((item) => item.id !== productId));
-  };
+ const handleRemoveFromCart = useCallback((productId) => {
+  setCart((prev) => {
+    const exists = prev.find((p) => p.id === productId);
+    if (!exists) return prev;
 
-  const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+    let updated;
+    if (exists.qty > 1) {
+      updated = prev.map((p) =>
+        p.id === productId ? { ...p, qty: p.qty - 1 } : p
+      );
+    } else {
+      updated = prev.filter((p) => p.id !== productId);
+    }
+
+    localStorage.setItem("cart", JSON.stringify(updated));
+    return updated;
+  });
+}, []);
+
+
+  const totalItems = useMemo(()=>cart.reduce((sum, item) => sum + item.qty, 0), [cart]);
 
   if (loading) return <p className="loading">Loading products...</p>;
   if (error) return <p className="error">{error}</p>;

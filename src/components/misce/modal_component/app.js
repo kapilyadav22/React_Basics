@@ -1,21 +1,17 @@
-import React, { useState } from "react";
-import Modal from "./modal";
+import { useState } from "react";
+import Modal from "./Modal";
 
-
-const App = () => {
-  const [isOpen, setIsOpen] = useState(false);
+export default function App() {
+  const [open, setOpen] = useState(false);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>React Modal Example</h2>
-      <button onClick={() => setIsOpen(true)}>Open Modal</button>
+    <>
+      <button onClick={() => setOpen(true)}>Open Modal</button>
 
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal isOpen={open} onClose={() => setOpen(false)}>
         <h3>Modal Title</h3>
-        <p>This is a reusable modal component using React Portal.</p>
+        <p>Modal content goes here</p>
       </Modal>
-    </div>
+    </>
   );
-};
-
-export default App;
+}

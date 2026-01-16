@@ -2,6 +2,7 @@ import ReactDom from "react-dom/client";
 // import App from "./components/modal_component/app";
 import NestedComments from "./components/hard/reddit_nested_comments/NestedComments";
 import LiveChat from "./components/hard/yt_live_chat_ui/LiveChat";
+import AutoComplete from "./components/medium/autoComplete_dropdown/Autocomplete";
 // import NestedCheckBox from "./components/Nested_CheckBoxes/NestedCheckBox";
 
 
@@ -24,7 +25,8 @@ const App = ()=>{
     {/* <ProductStore/> */}
     {/* <Auto/> */}
     {/* <NestedComments/> */}
-    <LiveChat/>
+    {/* <LiveChat/> */}
+    <AutoComplete/>
     </>
 };
 

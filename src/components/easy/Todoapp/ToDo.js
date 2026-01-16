@@ -1,36 +1,36 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
 function TodoList() {
-  const [task, setTask] = useState([]);
-  const [value, setValue] = useState('');
-  const handleInputChange = (e) => {
-    setValue(e.target.value);
-  }
-  const handleAddButton = () => {
-    if (value.trim() === "") return;
-    const item = {
-      id: task.length + 1,
-      text: value.trim(),
-      isCompleted: false
-    }
-    setTask((prev) => ([
-      ...prev,
-      item,
-    ]
-    ));
-    setValue('');
-  }
+  const [tasks, setTasks] = useState([]);
+  const [value, setValue] = useState("");
 
-  const handleDelete = (id) => {
-    setTask(task =>
-      task.filter(t => (t.id !== id))
-    );
+  const handleAdd = () => {
+    if (!value.trim()) return;
+
+    setTasks(prev => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        text: value.trim(),
+        isCompleted: false,
+      },
+    ]);
+
+    setValue("");
   };
 
-  const handleCheckBoxChange = (id) => {
-    setTask(prev =>
+  const handleDelete = (id) => {
+    if(id){
+      setTasks(prev => prev.filter(task => task.id !== id));
+    }
+  };
+
+  const handleToggleComplete = (id) => {
+    setTasks(prev =>
       prev.map(task =>
-        task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
+        task.id === id
+          ? { ...task, isCompleted: !task.isCompleted }
+          : task
       )
     );
   };
@@ -39,38 +39,34 @@ function TodoList() {
     <div>
       <div>
         <input
-          type='text'
+          type="text"
           value={value}
-          placeholder = "Enter todo"
-          onChange={handleInputChange}
-        ></input>
-        <button
-          onClick={handleAddButton}
-        >Add</button>
+          placeholder="Enter todo"
+          onChange={(e) => setValue(e.target.value)}
+        />
+        <button onClick={handleAdd}>Add</button>
       </div>
-      <ul>
-        {task.map((ele) => {
-          return <li key={ele.id}>
-            <input type='checkbox'
-              onClick={() => handleCheckBoxChange
-                (ele.id)}
-              checked={ele.isCompleted}
-            ></input>
+
+      <ul >
+        {tasks.map(task => (
+          <li key={task.id}>
+            <input
+              type="checkbox"
+              checked={task.isCompleted}
+              onChange={() => handleToggleComplete(task.id)}
+            />
             <span
               style={{
-                textDecoration: ele?.isCompleted ? "line-through" : "none",
+                textDecoration: task.isCompleted ? "line-through" : "none",
                 cursor: "pointer",
               }}
-            >{ele.text}</span>
-            <button
-              onClick={() => handleDelete(ele.id)}
-            >Delete</button>
+            >
+              {task.text}
+            </span>
+            <button onClick={() => handleDelete(task.id)}>Delete</button>
           </li>
-
-        })
-        }
+        ))}
       </ul>
-
     </div>
   );
 }

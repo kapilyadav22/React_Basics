@@ -1,52 +1,96 @@
-import React, { useEffect } from "react";
-import ReactDOM from "react-dom";
+import { useEffect } from "react";
 
-const Modal = ({ isOpen, onClose, children }) => {
+function Modal({ isOpen, onClose, children }) {
+
   useEffect(() => {
-    if (isOpen) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "auto";
-  }, [isOpen]);
+    if (!isOpen) return;
+
+    const handleEsc = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+
+    document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
-  return ReactDOM.createPortal(
-    <>
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "rgba(0,0,0,0.3)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <div
-        onClick={onClose}
+        onClick={(e) => e.stopPropagation()}
         style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          height: "100%",
-          width: "100%",
-          backgroundColor: "rgba(0,0,0,0.5)",
-          zIndex: 1000,
-        }}
-      ></div>
-
-      <div
-        style={{
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          background: "white",
-          borderRadius: "8px",
-          padding: "20px",
+          background: "#fff",
+          padding: "16px",
           minWidth: "300px",
-          zIndex: 1001,
-          boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
-          animation: "fadeIn 0.3s ease-out",
         }}
       >
+        <button
+          onClick={onClose}
+          style={{
+            float: "right",
+            cursor: "pointer",
+            border: "none",
+            background: "transparent",
+            fontSize: "16px",
+          }}
+        >
+          ✕
+        </button>
+
         {children}
-        <div style={{ textAlign: "right", marginTop: "10px" }}>
-          <button onClick={onClose}>Close</button>
-        </div>
       </div>
-    </>,
-    document.getElementById("modal-root") 
+    </div>
   );
-};
+}
 
 export default Modal;
+
+
+/*
+
+🧠 Key Interview Talking Points
+1️⃣ Why conditional rendering?
+    if (!isOpen) return null;
+
+    Prevents:
+Unnecessary DOM nodes
+Event listeners firing when modal is closed
+
+
+2️⃣ Why stopPropagation()?
+  onClick={(e) => e.stopPropagation()}
+
+Prevents overlay click from closing the modal when clicking inside content.
+
+
+❓ How would you prevent background scroll?
+useEffect(() => {
+  document.body.style.overflow = isOpen ? "hidden" : "auto";
+}, [isOpen]);
+
+
+❓ How to render modal at top of DOM?
+
+Use React Portal (advanced).
+
+⭐ Portal-Based Modal (Mention, optional)
+
+import { createPortal } from "react-dom";
+
+return createPortal(
+  <ModalContent />,
+  document.getElementById("modal-root")
+);
+
+*/
