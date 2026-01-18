@@ -84,12 +84,10 @@ const DebouncedSearch = () => {
         <p style={{ color: 'orange' }}>⌛ Waiting for you to stop typing...</p>
       )}
 
-      {/* Show debounced value */}
       {debouncedValue && !isSearching && (
         <p style={{ color: 'green' }}>Searching for: <strong>{debouncedValue}</strong></p>
       )}
 
-      {/* Results */}
       <div
         style={{
           marginTop: '20px',

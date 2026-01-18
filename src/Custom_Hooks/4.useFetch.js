@@ -15,7 +15,7 @@ function useFetch(url) {
 }
 
 
-/* Extended version
+/* Extended version with abort controller
 */
 
 
@@ -29,7 +29,7 @@ function useFetch(url, options = {}) {
   useEffect(() => {
     if (!url) return;
 
-    const controller = new AbortController(); // for canceling requests
+    const controller = new AbortController(); 
     const { signal } = controller;
 
     setLoading(true);

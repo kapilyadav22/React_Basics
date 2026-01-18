@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./app.css";
 
 const Pagination = () => {
@@ -7,20 +7,23 @@ const Pagination = () => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
 
+  const totalPages = Math.ceil(total / limit);
+
   useEffect(() => {
     fetchData();
   }, [page]);
 
   const handlePageNumberClick = (pageNumber) => {
-    if (pageNumber >= 1 && pageNumber <= total / limit && pageNumber != page)
+    if (pageNumber >= 1 && pageNumber <= totalPages && pageNumber !== page) {
       setPage(pageNumber);
+    }
   };
 
   const fetchData = async () => {
     try {
       const response = await fetch(
         `https://dummyjson.com/products?limit=${limit}&skip=${
-          page * limit - limit
+          (page - 1) * limit
         }`
       );
       const data = await response.json();
@@ -35,32 +38,28 @@ const Pagination = () => {
 
   return (
     <div>
-      {products &&
-        products.length > 0 &&
-        products.map((item, index) => {
-          return (
-            <div key={index} className="card">
-              <h3>{item.title}</h3>
-              <p>{item.price}</p>
-            </div>
-          );
-        })}
+      {products.map((item) => (
+        <div key={item.id} className="card">
+          <h3>{item.title}</h3>
+          <p>{item.price}</p>
+        </div>
+      ))}
 
-      <div
-        className="pagination"
-      >
+      <div className="pagination">
         {total > 0 && (
           <div>
             <span
               style={{
                 cursor: "pointer",
-                opacity: page < 2 ? "0" : "100",
+                opacity: page === 1 ? "0" : "100",
               }}
               onClick={() => handlePageNumberClick(page - 1)}
             >
               Previous
             </span>
-            {[...Array(Math.floor(total / limit))].map((_, index) => {
+
+    {/* {Array.from({ length: totalPages }, (_, index) => { */}
+            {[...Array(totalPages)].fill('-').map((_, index) => {
               return (
                 <span
                   style={{
@@ -70,20 +69,22 @@ const Pagination = () => {
                     padding: "2px",
                     margin: "5px",
                     width: "50px",
-                    backgroundColor: page - 1 === index ? "grey" : "white",
+                    backgroundColor:
+                      page === index + 1 ? "grey" : "white",
                   }}
                   onClick={() => handlePageNumberClick(index + 1)}
-                  key={index}
+                  key={index + 1}
                 >
                   {index + 1}
                 </span>
               );
             })}
+
             <span
               onClick={() => handlePageNumberClick(page + 1)}
               style={{
                 cursor: "pointer",
-                opacity: page >= total / limit - 1 ? "0" : "100",
+                opacity: page === totalPages ? "0" : "100",
               }}
             >
               Next

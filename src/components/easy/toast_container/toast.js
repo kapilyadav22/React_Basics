@@ -1,36 +1,31 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
-const Toast = ({ message, type = "info", duration = 3000, onClose }) => {
+const colors = {
+  success: "#4caf50",
+  error: "#f44336",
+  warning: "#ff9800",
+  info: "#2196f3",
+};
+
+const Toast = ({ id, message, type = "info", duration = 3000, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      onClose();
+      onClose(id);
     }, duration);
-    return () => clearTimeout(timer);
-  }, [duration, onClose]);
 
-  const getBackgroundColor = (type) => {
-    switch (type) {
-      case "success":
-        return "#4caf50";
-      case "error":
-        return "#f44336";
-      case "warning":
-        return "#ff9800";
-      default:
-        return "#2196f3";
-    }
-  };
+    return () => clearTimeout(timer);
+  }, [id, duration, onClose]);
 
   return (
     <div
       style={{
-        backgroundColor: getBackgroundColor(type),
+        backgroundColor: colors[type],
         color: "white",
         padding: "10px 20px",
         borderRadius: "5px",
         marginBottom: "10px",
         boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
-        animation: "fadeIn 0.3s ease-in-out",
+        // animation: "fadeIn 0.3s ease-in-out",
       }}
     >
       {message}
@@ -42,39 +37,45 @@ const ToastContainer = () => {
   const [toasts, setToasts] = useState([]);
 
   const addToast = (message, type) => {
-    const id = Date.now();
+    const id = crypto.randomUUID();
     setToasts((prev) => [...prev, { id, message, type }]);
   };
 
-  const removeToast = (id) => {
-    setToasts((prev) => prev.filter((toast) => toast.id !== id));
-  };
+  const removeToast = useCallback((id) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
 
   return (
     <div>
-      <div style={{ marginBottom: "20px"}}>
-        <button onClick={() => addToast("Success message!", "success")}>Success</button>
-        <button onClick={() => addToast("Error occurred!", "error")}>Error</button>
+      <div style={{ marginBottom: "20px" }}>
+        <button onClick={() => addToast("Success message!", "success")}>
+          Success
+        </button>
+        <button onClick={() => addToast("Error occurred!", "error")}>
+          Error
+        </button>
         <button onClick={() => addToast("Just FYI!", "info")}>Info</button>
         <button onClick={() => addToast("Warning!", "warning")}>Warning</button>
       </div>
 
       <div
         style={{
-        //   position: "fixed",
+          position: "fixed",
           top: "20px",
           right: "20px",
-          justify:'center',
+          justify: "center",
           zIndex: 1000,
-          width: '200px'
+          width: "200px",
         }}
       >
         {toasts.map((toast) => (
           <Toast
             key={toast.id}
+            id={toast.id}
             message={toast.message}
             type={toast.type}
-            onClose={() => removeToast(toast.id)}
+            duration={2000}
+            onClose={removeToast}
           />
         ))}
       </div>
